@@ -7,16 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $filelable = [
-      'product_name', 'description', 'price', 'stock', 'img1', 'img2', 'img3',
+      'product_name', 'description', 'price', 'stock', 'img1', 'img2', 'img3', 'size_id',
     ];
 
-    public function sizes()
+    public function size()
   	{
-      return $this->belongsToMany(Size::class)->withTimestamps();
+      return $this->hasOne(Size::class, 'id', 'size_id');
   	}
 
-    public function users()
+    public function user()
     {
-      return $this->belongsToMany(User::class)->withTimestamps();
+      return $this->belongsTo(User::class);
     }
 }

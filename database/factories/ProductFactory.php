@@ -11,5 +11,6 @@ $factory->define(App\Product::class, function (Faker $faker) {
         'img1' => $faker->imageUrl(320, 240, 'cats'),
         'img2' => $faker->imageUrl(320, 240, 'cats'),
         'img3' => $faker->imageUrl(320, 240, 'cats'),
-    ];
+      ];
+
 });

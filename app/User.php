@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'country', 'avatar'
+        'name', 'user_name', 'email', 'password', 'country', 'avatar'
     ];
 
     /**
@@ -30,6 +30,6 @@ class User extends Authenticatable
 
     public function products()
     {
-      return $this-> belongsToMany(Product::class)->withTimestams();
+      	return $this->hasMany(Product::class);
     }
 }
