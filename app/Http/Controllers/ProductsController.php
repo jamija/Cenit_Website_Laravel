@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Product;
+use App\Size;
+
 
 class ProductsController extends Controller
 {
@@ -14,8 +17,8 @@ class ProductsController extends Controller
      */
     public function index()
     {
-      $allProducts = Procut::all()->count();
-      $products = Procut::orderBy('name')->paginate(20);
+      $allProducts = Product::all()->count();
+      $products = Product::orderBy('name')->paginate(20);
       return view('products.index')->with(compact('allProducts', 'products'));
     }
 
@@ -48,7 +51,9 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        //
+      $product = Product::findOrFail($id);
+
+      return view('products.show')->with(compact('product'));
     }
 
     /**
@@ -59,7 +64,10 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+      $product = Product::findOrFail($id);
+  		$size = Size::all();
+
+  		return view('products.editForm')->with( compact('product', 'size') );
     }
 
     /**

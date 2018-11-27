@@ -10,9 +10,9 @@
 	@foreach ($products as $product)
 
 		<li style="padding: 10px 0;">
-			<h3> {{ $product->name }} </h3>
-      <p> {{ $product->country }}</p>
-      <a href="/users/{{ $product->id }}" class="btn btn-success">ver detalle</a>
+			<h3>Nombre: {{ $product->name }} </h3>
+      <p>Precio: {{ $product->price }}</p>
+      <a href="/products/{{ $product->id }}" class="btn btn-success">ver detalle</a>
     </li>
 	@endforeach
 
