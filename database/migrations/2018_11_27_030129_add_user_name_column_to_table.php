@@ -14,7 +14,7 @@ class AddUserNameColumnToTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('userName', 50)->after('email');
+            $table->string('user_name', 50)->after('email');
         });
     }
 
@@ -26,7 +26,7 @@ class AddUserNameColumnToTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('userName');
+            $table->dropColumn('user_name');
         });
     }
 }
