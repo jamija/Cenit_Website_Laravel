@@ -23,3 +23,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('users', 'UsersController');
 Route::resource('products', 'ProductsController');       //->except('create');
 Route::resource('sizes', 'SizesController');
+Route::get('profile', 'HomeController@profile');
