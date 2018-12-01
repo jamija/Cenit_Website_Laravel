@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $filelable = [
-      'name', 'description', 'price', 'stock', 'img1', 'img2', 'img3', 'size_id',
+      'name', 'description', 'price', 'stock', 'img1', 'size_id',
     ];
 
     public function size()

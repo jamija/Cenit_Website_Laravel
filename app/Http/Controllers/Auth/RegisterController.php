@@ -50,8 +50,11 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
+            'user_name' => 'required|string|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'country' => 'required',
+            'avatar' => 'mimes:jpeg,jpg,png',
         ]);
     }
 
@@ -63,10 +66,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+      // Necesito el archivo en una variable esta vez
+  		$file = $data["avatar"];
+
+  		// Nombre final de la imagen
+  		$finalName = strtolower(str_replace(" ", "_", $data["name"]));
+
+  		// Armo un nombre único para este archivo
+  		$name = $finalName . uniqid('_image_') . "." . $file->extension();
+
+  		// Guardo el archivo en la carpeta
+  		$file->storePubliclyAs("public/users/images", $name);
+
+
         return User::create([
             'name' => $data['name'],
+            'user_name' => $data['user_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'country' => $data['country'],
+            'avatar' => $name,
         ]);
     }
 }

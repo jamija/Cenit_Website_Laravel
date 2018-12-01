@@ -11,10 +11,8 @@
 	<p><b>Talla:</b> {{ $product->size->size}}</p>
 	<p><b>Precio:</b> {{ $product->price }}</p>
 	<p><b>Stock:</b> {{ $product->stock ?? 'Sin Stock'}}</p>
-	<img src="{{ $product->img1 }}" width="200">
-	<img src="{{ $product->img2 }}" width="100">
-	<img src="{{ $product->img3 }}" width="100">
-	<hr>
+	<img src="/storage/products/images/{{$product->img1}}" width="200">
+<hr>
 	<a href="/products" class="btn btn-info">Atrás</a>
 	<a href="/products/{{ $product->id }}/edit" class="btn btn-warning">Editar</a>
 	<form action="{{ route('products.destroy', $product->id) }}" method="post" style="display: inline-block;">

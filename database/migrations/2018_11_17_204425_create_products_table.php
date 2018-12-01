@@ -22,8 +22,6 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('img1', 100)->nullable();
-            $table->string('img2', 100)->nullable();
-            $table->string('img3', 100)->nullable();
             $table->timestamps();
         });
     }
