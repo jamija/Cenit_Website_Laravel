@@ -32,17 +32,18 @@
         <nav class="navbar-nav">
             <a href="#" class="toggle-nav"> </a>
             <!-- Navbar Logo -->
-            <div class="header-brand">
-          				<a class="navbar-brand" href="index"> <img src="images/logo.jpg" alt="logotipo"></a>
-            </div>
+            <ul class="header-brand">
+          			<li><a class="link-nav" href="home"> <img src="images/logo.jpg" alt="logotipo"></a></li>
+            </ul>
             <!-- Navbar Links -->
             <ul>
-                <li><a class="link-nav" href="index">Inicio</a></li>
+                <li><a class="link-nav" href="home">Inicio</a></li>
                 <li><a class="link-nav" href="faq">Preguntas Frecuentes</a></li>
                 <li><a class="link-nav" href="product-catalog">Tienda</a></li>
             </ul>
             <!-- Authentication Links -->
             <ul>
+              <!-- if Not Logged in-->
             @guest
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -52,11 +53,15 @@
                         <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                     @endif
                 </li>
+              <!-- if Logged in -->
             @else
-                <li> <a class= href="profile">
-                        {{ Auth::user()->name }} <img class="imgNavProf" src="/public/users/images/{{ Auth::user()->avatar }}">}
+                <li class="nav-item"> <a href="profile">
+                        {{ Auth::user()->name }}
+                        @if (Auth::user()->avatar) <img class="imgNavProf" src="/public/users/images/{{ Auth::user()->avatar }}">
+                        @else <img class="imgNavProf" src="http://placekitten.com/g/200/300">
                     </a>
                 </li>
+            @endif
 
                 <li>
                     <a class="link-nav" href="{{ route('logout') }}"
@@ -79,14 +84,13 @@
                 </li>
           </ul>
 
-  </nav>
-
+        </nav>
     </header>
-      <!-- Content -->
+    <!-- Content -->
       <section class="@yield('main-Section-class')">
           @yield('main-section-content')
       </section>
-      <!-- Footer -->
+    <!-- Footer -->
       <footer>
         <section class="footer-info">
           <h6>cenit.indumento@gmail.com</h6>

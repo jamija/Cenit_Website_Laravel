@@ -4,7 +4,7 @@
 
 @section('content')
 
-  <h2>Lista de Usuarios - Total ({{ $allProducts }})</h2>
+  <h2>Lista de Productos - Total ({{ $allProducts }})</h2>
 
   {{-- @if ( session('deleted') )
     <div class="alert alert-success">

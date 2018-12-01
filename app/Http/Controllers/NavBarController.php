@@ -20,13 +20,6 @@ class NavBarController extends Controller
       {
       return view('faq');
   }
-  public function store()
-      {
-      return view('store');
-  }
-
-
-
     public function index()
     {
         //
