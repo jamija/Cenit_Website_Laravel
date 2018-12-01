@@ -4,7 +4,7 @@
 
 @section ('Registráte')
 
-@section ('body-faq')
+@section ('main-section-content')
 
         <div class="faq-container">
         <div class="question-container">
