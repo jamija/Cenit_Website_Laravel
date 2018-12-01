@@ -10,6 +10,7 @@ body {
 .body-index {
 	font-family: 'Telex', sans-serif;
 	background-image: url('../images/background-image.png');
+	background-image: url("{{ asset('/images/background-image.png')}}");
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-position: left;

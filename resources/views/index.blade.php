@@ -4,6 +4,8 @@
 
 @section ('body-index')
 
+@section('main-Section-class', 'body-index')
+
 @section ('main-section-content')
 
 			<div class="body-main">
