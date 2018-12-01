@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ProductsRequest;
 
 use App\Product;
 use App\Size;
+use App\User;
 
 
 class ProductsController extends Controller
@@ -29,7 +31,11 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+      $product = Product::all();
+      $sizes = Size::all();
+  		$users = User::all();
+
+      return view('products.form')->with(compact('sizes', 'users', 'product'));
     }
 
     /**
@@ -38,9 +44,13 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductsRequest $request)
     {
-        //
+        $product = new Product;
+
+        self::storeOrUpdate($product, $request);
+
+        return redirect('/products');
     }
 
     /**
@@ -65,9 +75,10 @@ class ProductsController extends Controller
     public function edit($id)
     {
       $product = Product::findOrFail($id);
-  		$size = Size::all();
+  		$sizes = Size::all();
+  		$users = User::all();
 
-  		return view('products.editForm')->with( compact('product', 'size') );
+  		return view('products.editForm')->with( compact('product', 'sizes', 'users') );
     }
 
     /**
@@ -77,9 +88,13 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductsRequest $request, $id)
     {
-        //
+      $product = Product::find($id);
+
+      self::storeOrUpdate($product, $request);
+
+      return redirect('/products')->with('edited', "Movie editada: $product->name");
     }
 
     /**
@@ -90,6 +105,39 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+      try{
+        $product = Product::findOrFail($id);
+        $product->delete();
+
+        return redirect('/products')->with('deleted', 'Producto Eliminado');
+      } catch (\Exception $e) {
+        return redirect('/products/'.$id)->with('errorDeleted', 'No se pudo eliminar');
+      }
     }
+    public function storeOrUpdate($product, $request)
+  	{
+  		$product->name = $request->name;
+  		$product->description = $request->description;
+  		$product->price = $request->price;
+  		$product->stock = $request->stock;
+  		$product->size_id = $request->size_id;
+  		$product->user_id = $request->user_id;
+
+
+  		// Necesito el archivo en una variable esta vez
+  		$file = $request->file("img1");
+
+  		// Nombre final de la imagen
+  		$finalName = strtolower(str_replace(" ", "_", $request->input("name")));
+
+  		// Armo un nombre único para este archivo
+  		$name = $finalName . uniqid('_image_') . "." . $file->extension();
+
+  		// Guardo el archivo en la carpeta
+  		$file->storePubliclyAs("public/products/images", $name);
+
+  		// Guardo en base de datos el nombre de la imagen
+  		$product->img1 = $name;
+  		$product->save();
+  	}
 }

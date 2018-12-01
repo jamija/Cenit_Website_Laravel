@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,9 +17,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Route::middleware('auth')->group(function() {
+// 	Route::get('/products/create', 'ProductsController@create')
+// 			->name('products.create');
+//
+// });
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('users', 'UsersController');
-Route::resource('products', 'ProductsController');
+Route::resource('products', 'ProductsController');       //->except('create');
 Route::resource('sizes', 'SizesController');
