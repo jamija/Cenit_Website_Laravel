@@ -6,27 +6,29 @@
 
 @section ('main-section-content')
 
-<!-- logica NOT LOGGED -> #LOGIN -->
+  <!-- if Not Logged in-->
+  @guest
+    <<?php return redirect()->route('login'); ?>
 
-<h1 class=user-name >Bienvenidx <?= $theUser->getName() ?></h1>
-    <div class="allContainer">
-        <div class="container-profile-img">
-          <img  class=user-profile-image
-          src="data/avatars/<?= $theUser->getImage() ?>" alt="" >
+  <!-- if Logged in -->
+  @else
+    <!-- profile page -->
+    <h1 class=user-name >Bienvenidx {{ Auth::user()->name }} </h1>
+        <div class="allContainer">
+            <div class="container-profile-img">
+                @if (Auth::user()->avatar) <img class="user-profile-image" src="/public/users/images/{{ Auth::user()->avatar }}">
+                @else <img class="user-profile-image" src="http://placekitten.com/g/200/300">
+                @endif
+            </div>
+            <div class="container-profile-data">
+              <h3 class=user-data>{{ Auth::user()->email }}</h3>
+            <h3 class=user-data>{{ Auth::user()->country }}</h3>
+            </div>
         </div>
-        <div class="container-profile-data">
-        <h3 class=user-data><?= $theUser->getEmail() ?></h3>
-
-        <?php foreach (COUNTRIES as $code => $country): ?>
-
-          <h3 class=user-data>
-            <?= $code == $theUser->getCountry() ? "$country" : ""?> </h3>
-          <?php endforeach; ?>
-        </div>
-      </div>
-    <section class="user-profile-options">
-      <p><a	href="#"></a> Mis compras</p>
-      <p><a	href="#"></a> Wishlist</p>
-    </section>
-
+        <!-- profile options-->
+        <section class="user-profile-options">
+                  <p><a	href="history"></a> Mis compras</p>
+                  <p><a	href="wishlist"></a> Wishlist</p>
+        </section>
+    @endif
 @endsection
