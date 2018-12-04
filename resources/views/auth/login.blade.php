@@ -1,8 +1,6 @@
 @extends('layouts.default')
 
-@section ('title', 'cenit')
-
-@section ('main-Section-class')
+@section ('title', 'cenit - Logueate')
 
 @section ('main-section-content')
 

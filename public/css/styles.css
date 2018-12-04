@@ -460,7 +460,7 @@ padding: 15px;
 /*_______login.php && register.php__________________*/
 
 	.container-page{
-		padding: 50px;
+		padding: 20px 50px;
 		width: 800px;
 		margin: auto;
 		overflow: hidden;
@@ -474,16 +474,19 @@ padding: 15px;
 
 	.container-img img {
     border-style: none;
-    width: 50%;
+    width: 100%;
 		margin-top: 30px;
 	}
 
 	.container-form{
-		padding-top: 30px;
-		width: 50%;
+		width: 100%;
 		height: auto;
 		float: left;
 		margin: 0;
+	}
+
+	.form-body{
+		display: inline;
 	}
 	.registerTitle{
 		margin-top:  0px !important;

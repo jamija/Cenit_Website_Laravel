@@ -1,122 +1,142 @@
-@extends('layouts.app')
+@extends('layouts.default')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+@section ('title', ' cenit - Registráte')
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
-                        @csrf
+@section ('main-section-content')
 
-                        {{-- Campo para crear el nombre del usuario --}}
+<div class="container-page">
+		 <!-- Register-Form -->
+			   <div class="container-form" "register">
+					 <div class="container-form">
+			         <!-- form header -->
+			         <div class="form-header">
+				           <h2>{{ __('Registrate') }}</h2>
+				         	<p>Por favor llena este formulario <br>para crear una cuenta.</p>
+			      		</div>
+      <!-- form body -->
+        	<div class="form-body">
+						<form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+								@csrf
+                <!-- name input -->
+								<div>
+                		<label  for="name">  <b>{{ __('Ingresa Nombre Completo') }}</b></label>
+										<input id="name"
+										 type="text"
+										 class="formInput{{ $errors->has('name') ? ' is-invalid' : '' }}"
+										 name="name"
+										 value="{{ old('name') }}" required autofocus
+										 placeholder="Nombre completo"
+										 >
+								</div>
+                <!-- name auth -->
+										 <div>
+												 @if ($errors->has('name'))
+														 <span class="invalid-feedback" role="alert">
+																 <strong>{{ $errors->first('name') }}</strong>
+														 </span>
+												 @endif
+										 </div>
+										<br>
+										<!-- Create Username input -->
+								<div>
+										<label><b>Nombre de usuario</b></label>
+										<input
+										id="user_name"
+										type="text"
+										placeholder="Nombre de usuario"
+										name="user_name"
+										class="formInput{{ $errors->has('user_name') ? ' is-invalid' : '' }}"
+										value="{{ old('user_name') }}"
+										required>
+								</div>
+										<!-- Username auth -->
+								<div>
+										@if ($errors->has('user_name'))
+												<span class="invalid-feedback" role="alert">
+														<strong>{{ $errors->first('user_name') }}</strong>
+												</span>
+										@endif
+								</div>
+										<!-- Email input -->
+								<div>
+									<label  for="email">  <b>{{ __('Ingresa tu E-Mail') }}</b></label>
+											<br>
+											<input id="email"
+											type="email"
+											class="formInput{{ $errors->has('email') ? ' is-invalid' : '' }}"
+											name="email"
+											placeholder="Ingresa tu nombre de usuario"
+											value="{{ old('email') }}" required autofocus
+											>
+								</div>
+										<!-- Email auth -->
+								<div>
+									@if ($errors->has('email'))
+											<span class="invalid-feedback" role="alert">
+													<strong>{{ $errors->first('email') }}</strong>
+											</span>
+									@endif
+								</div>
+								<!-- country selector-->
+	<!-- {{-- Acá va la consulta de paises a la api con javaS de momento solo vaos a prorar el crud--}} -->
+								<div>
+										<label for="country">{{ __('Selecciona tu País') }}</label>
+										<input id="country" type="text" class="formInput{{ $errors->has('country') ? ' is-invalid' : '' }}" name="country" value="{{ old('country') }}" required>
+								</div>
+									<!-- country auth-->
+								<div>
+										@if ($errors->has('country'))
+												<span class="invalid-feedback" role="alert">
+														<strong>{{ $errors->first('country') }}</strong>
+												</span>
+										@endif
+								</div>
+								<!-- form Password input -->
+								<div>
+                <label for="password"><b>{{ __('Ingresa tu
+                  contraseña') }}</b></label>
+                    <br>
+                    <input id="password"
+                    type="password"
+                    class=
+                          "formInput{{ $errors->has('password') ? ' is-invalid' : '' }}"
+                    name="password" required
+                    placeholder= "Ingresa tu contraseña"
+                    >
+								</div>
 
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
-
-                                @if ($errors->has('name'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        {{-- Campo dnde se coloca el user name --}}
-
-                        <div class="form-group row">
-                            <label for="user_name" class="col-md-4 col-form-label text-md-right">{{ __('Nick Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="user_name" type="text" class="form-control{{ $errors->has('user_name') ? ' is-invalid' : '' }}" name="user_name" value="{{ old('user_name') }}" required>
-
-                                @if ($errors->has('user_name'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('user_name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Dirección de Mail') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        {{-- Acá va la consulta de paises a la api con javaS de momento solo vaos a prorar el crud--}}
-
-                        <div class="form-group row">
-                            <label for="country" class="col-md-4 col-form-label text-md-right">{{ __('País') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="country" type="text" class="form-control{{ $errors->has('country') ? ' is-invalid' : '' }}" name="country" value="{{ old('country') }}" required>
-
-                                @if ($errors->has('country'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('country') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
-
-                      {{-- campo plantead para a imagen o Avatare --}}
-
-                        <div class="form-group">
-                    			<label>Imagen de Perfil:</label>
-                    			<div class="custom-file">
-                    		    	<input type="file" class="custom-file-input" id="customFile" name="avatar">
-                    		    	<label class="custom-file-label" for="customFile">Choose file...</label>
-                    		  	</div>
-                    		</div>
-
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                <!-- form Password auth -->
+                <div>
+                    @if ($errors->has('password'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('password') }}</strong>
+                        </span>
+                    @endif
                 </div>
+                <!-- form Confirm Password auth -->
+								<div>
+										<label for="password-confirm">
+                      <b>{{ __('Confirma tu contraseña') }}</b></label>
+                      <input id="password-confirm" type="password" class="formInput" name="password_confirmation" required>
+								</div>
+                      <!-- {{-- campo plantead para a imagen o Avatare --}} -->
+
+                <!-- image input -->
+								<div class="custom-file">
+											<label class="custom-file-label" for="customFile"><b> Seleciona una imagen de perfil...</b></label>
+											<input type="file" class="formInput" id="customFile" name="avatar">
+								</div>
+					 	</form>
+                <p>Creando una cuenta aceptas nuestras <a href="#" style="color:dodgerblue">Politicas de privacidad</a>.</p>
+
+               <button type="button" class="cancelBtn">Cancelar</button>
+               <button type="submit" class="signupBtn">Registrarme</button>
             </div>
-        </div>
-    </div>
-</div>
+                <!-- End form body -->
+                <!-- side Image -->
+                <div class="container-img">
+                    <img src="images/page-img/leaves.jpg"	class="page-img">
+                </div>
+                <!-- end side Image -->
+		 </div>
 @endsection
