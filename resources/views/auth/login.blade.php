@@ -24,7 +24,8 @@
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <!-- form Email input -->
-                <label  for="email">  <b>{{ __('Ingresa tu E-Mail') }}</b></label>
+            <div class="input-container">
+               <label  for="email">  <b>{{ __('Ingresa tu E-Mail') }}</b></label>
                     <br>
                     <input id="email"
                     type="email"
@@ -41,9 +42,14 @@
                         </span>
                     @endif
                 </div>
+            <!-- JS Validation Error Text -->
+                <span class="errorText"></span>
+            </div>
 
-                <!-- form Password input -->
-                <label for="password"><b>{{ __('Ingresa tu
+
+            <!-- form Password input -->
+            <div class="input-container">
+                  <label for="password"><b>{{ __('Ingresa tu
                   contraseña') }}</b></label>
                     <br>
                     <input id="password"
@@ -63,6 +69,9 @@
                         </span>
                     @endif
                 </div>
+                <!-- JS Validation Error Text -->
+                <span class="errorText"></span>
+            </div>
                 <!-- form checkbox -->
                 <div class="checkboxContainer">
                     <input class="formCheckbox" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>

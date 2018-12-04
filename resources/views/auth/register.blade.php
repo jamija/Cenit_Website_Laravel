@@ -18,7 +18,8 @@
 						<form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
 								@csrf
                 <!-- name input -->
-								<div>
+            <div class="input-container">
+              <div>
                 		<label  for="name">  <b>{{ __('Ingresa Nombre Completo') }}</b></label>
 										<input id="name"
 										 type="text"
@@ -37,8 +38,12 @@
 												 @endif
 										 </div>
 										<br>
+                    <!-- JS Validation Error Text -->
+                    <span class="errorText"></span>
+            </div>
 										<!-- Create Username input -->
-								<div>
+            <div class="input-container">
+    						<div>
 										<label><b>Nombre de usuario</b></label>
 										<input
 										id="user_name"
@@ -57,8 +62,11 @@
 												</span>
 										@endif
 								</div>
+                <!-- JS Validation Error Text -->
+                <span class="errorText"></span>
+            </div>
 										<!-- Email input -->
-								<div>
+						<div class="input-container">		<div>
 									<label  for="email">  <b>{{ __('Ingresa tu E-Mail') }}</b></label>
 											<br>
 											<input id="email"
@@ -77,9 +85,13 @@
 											</span>
 									@endif
 								</div>
+                <!-- JS Validation Error Text -->
+                <span class="errorText"></span>
+            </div>
 								<!-- country selector-->
 	<!-- {{-- Acá va la consulta de paises a la api con javaS de momento solo vaos a prorar el crud--}} -->
-								<div>
+	          <div class="input-container">
+                <div>
 										<label for="country">{{ __('Selecciona tu País') }}</label>
 										<input id="country" type="text" class="formInput{{ $errors->has('country') ? ' is-invalid' : '' }}" name="country" value="{{ old('country') }}" required>
 								</div>
@@ -91,7 +103,11 @@
 												</span>
 										@endif
 								</div>
+                <!-- JS Validation Error Text -->
+                <span class="errorText"></span>
+            </div>
 								<!-- form Password input -->
+            <div class="input-container">
 								<div>
                 <label for="password"><b>{{ __('Ingresa tu
                   contraseña') }}</b></label>
@@ -104,7 +120,6 @@
                     placeholder= "Ingresa tu contraseña"
                     >
 								</div>
-
                 <!-- form Password auth -->
                 <div>
                     @if ($errors->has('password'))
@@ -113,19 +128,31 @@
                         </span>
                     @endif
                 </div>
-                <!-- form Confirm Password auth -->
+                <!-- JS Validation Error Text -->
+                <span class="errorText"></span>
+            </div>
+
+                <!-- form Confirm Password -->
+            <div class="input-container">
 								<div>
 										<label for="password-confirm">
                       <b>{{ __('Confirma tu contraseña') }}</b></label>
                       <input id="password-confirm" type="password" class="formInput" name="password_confirmation" required>
 								</div>
+                <!-- JS Validation Error Text -->
+                <span class="errorText"></span>
+            </div>
                       <!-- {{-- campo plantead para a imagen o Avatare --}} -->
 
                 <!-- image input -->
+            <div class="input-container">
 								<div class="custom-file">
 											<label class="custom-file-label" for="customFile"><b> Seleciona una imagen de perfil...</b></label>
 											<input type="file" class="formInput" id="customFile" name="avatar">
 								</div>
+                <!-- JS Validation Error Text -->
+                <span class="errorText"></span>
+            </div>
 					 	</form>
                 <p>Creando una cuenta aceptas nuestras <a href="#" style="color:dodgerblue">Politicas de privacidad</a>.</p>
 
